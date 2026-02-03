@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine?</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to bottom, #ffb6c1, #ffe6f0);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 25px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #ff2d75;
+      margin-bottom: 10px;
+    }
+
+    img {
+      width: 220px;
+      border-radius: 20px;
+      margin: 15px 0;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #ff2d75;
+      color: white;
+      box-shadow: 0 5px 15px rgba(255, 45, 117, 0.4);
+    }
+
+    #noBtn {
+      background: white;
+      color: #ff2d75;
+      border: 2px solid #ff2d75;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Hearts Container -->
+  <div id="hearts"></div>
+
+  <!-- Main Card -->
+  <div class="card">
+    <h1>💘 Roms, will you be my Valentine? 💘</h1>
+
+    <img
+      src="https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif"
+      alt="Cute gif"
+    />
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 😢</button>
+    </div>
+  </div>
+
+  <script>
+    let yesBtn = document.getElementById("yesBtn");
+    let noBtn = document.getElementById("noBtn");
+
+    let yesSize = 18;
+
+    let noMessages = [
+      "Please cutie 🥺",
+      "Don't say no 😭",
+      "I’ll cryyyy 💔",
+      "Say yes pls 💕",
+      "I'll buy you milk tea 🧋",
+      "Roms pleaseeee 😩",
+      "JUST CLICK YES 😭💖"
+    ];
+
+    let messageIndex = 0;
+
+    // NO button click effect
+    noBtn.addEventListener("click", function () {
+      yesSize += 10;
+      yesBtn.style.fontSize = yesSize + "px";
+
+      if (messageIndex < noMessages.length) {
+        noBtn.innerText = noMessages[messageIndex];
+        messageIndex++;
+      } else {
+        noBtn.innerText = "Okay okay YES 😭💘";
+      }
+    });
+
+    // YES button click effect
+    yesBtn.addEventListener("click", function () {
+      document.body.innerHTML = `
+        <div class="card">
+          <h1>YAYYYYY ROMS SAID YES!!! 💖🥰</h1>
+          <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" />
+          <h2>See you on Valentine’s Day 😘🌹</h2>
+        </div>
+      `;
+    });
+
+    // Floating hearts generator
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💗";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
